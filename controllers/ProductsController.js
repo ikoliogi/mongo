@@ -1,7 +1,16 @@
+const mongoose = require('mongoose');
+
 const list = async (req, res) => {
     const products = await Product
         .find({})
         .populate("category")
+        .exec();
+    res.json(products);
+};
+
+const cartList = async (req, res) => {
+    const products = await Product
+        .find({_id: req.body.productIds}, 'title price photo')
         .exec();
     res.json(products);
 };
@@ -14,12 +23,20 @@ const listByCategory = async (req, res) => {
 };
 
 const getOne = async (req, res) => {
-    const product = await Product
-        .findById(req.params.productId)
-        .populate("category")
-        .exec();
 
-    res.json(product);
+    if (mongoose.Types.ObjectId.isValid(req.params.productId)) { // checks if param is productId
+        const product = await Product
+            .findById(req.params.productId)
+            .populate("category")
+            .exec();
+
+        res.json(product);
+    } else {
+        res.json({
+            message: "Product not Found"
+        })
+    }
+
 };
 
 const create = async (req, res) => {
@@ -69,5 +86,6 @@ module.exports = {
     getOne,
     create,
     deleteProduct,
-    update
+    update,
+	cartList
 };

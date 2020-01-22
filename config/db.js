@@ -1,17 +1,40 @@
 const mongoose = require("mongoose");
+const bcrypt = require("mongoose-bcrypt"); // encrypting fields
 
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
 
-global.User = mongoose.model("User", {
-    firstName: String,
-    lastName: String,
-    email: String
+// USER
+const userSchema = mongoose.Schema({
+    firstName: {
+        type: String,
+        required: true
+    }, // mporoume na dwsoume epipleon idiothtes sto first name
+    lastName: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true,
+        bcrypt: true
+    }
+}, {
+    timestamps: true // adds timestamps
 });
 
-global.Product = mongoose.model("Product", {
+userSchema.plugin(bcrypt);
+global.User = mongoose.model("User", userSchema);
+
+//PRODUCT
+const productSchema = mongoose.Schema({
     category: {
         type: mongoose.Types.ObjectId,
         ref: "Category"
@@ -22,8 +45,17 @@ global.Product = mongoose.model("Product", {
     price: Number,
     sale: Number,
     photo: String
+}, {
+    timestamps: true
 });
 
-global.Category = mongoose.model("Category", {
+global.Product = mongoose.model("Product", productSchema);
+
+//CATEGORY
+const categorySchema = mongoose.Schema({
     title: String
+}, {
+    timestamps: true
 });
+
+global.Category = mongoose.model("Category", categorySchema);

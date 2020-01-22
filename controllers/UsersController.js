@@ -14,11 +14,18 @@ const create = (req, res) => {
     const u = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        email: req.body.email
+        email: req.body.email,
+        password: req.body.password
     });
-    u.save().then(() => {
+    u.save()
+    .then(() => {
         res.json({
             message: "User created"
+        });
+    })
+    .catch(() => {
+        res.json({
+            message: "User Not created"
         });
     });
 };
