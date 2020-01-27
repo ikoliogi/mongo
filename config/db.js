@@ -25,6 +25,11 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
         bcrypt: true
+    },
+    role: {
+        type: String,
+        default: "client", // default role
+        enum: ["client", "admin", "superUser"]
     }
 }, {
     timestamps: true // adds timestamps

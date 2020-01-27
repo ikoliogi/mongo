@@ -5,17 +5,20 @@ const list = (req, res) => {
 };
 
 const getOne = (req, res) => {
+
     User.findById(req.params.userId, (err, users) => {
         res.json(users);
     });
 };
 
 const create = (req, res) => {
+
     const u = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        // role: req.body.role
     });
     u.save()
     .then(() => {

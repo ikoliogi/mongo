@@ -5,6 +5,7 @@ route.get("/", (req, res) => {
     res.send("Admin Area"); // http://localhost:3000/admin
 });
 
+route.use("/auth", require("./auth"));
 route.use("/users", require("./users")); //olo to routing ksekinaei meta to /users
 route.use("/products", require("./products"));
 route.use("/categories", require("./categories"));

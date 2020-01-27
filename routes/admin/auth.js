@@ -7,7 +7,6 @@ route.get("/test", (req, res) => {
     res.send("test");
 });
 
-route.post("/login", AuthValidator.login, AuthController.login);
-route.post("/register", AuthValidator.register, AuthController.register);
+route.post("/login", AuthValidator.login, AuthController.adminLogin);
 
 module.exports = route;
