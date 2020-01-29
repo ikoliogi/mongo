@@ -58,7 +58,11 @@ global.Product = mongoose.model("Product", productSchema);
 
 //CATEGORY
 const categorySchema = mongoose.Schema({
-    title: String
+    title: {
+        type: String,
+        required: true,
+        unique: true
+    }
 }, {
     timestamps: true
 });

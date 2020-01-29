@@ -35,7 +35,8 @@ const adminLogin = async (req, res) => {
                 _id: user._id,
                 firstName: user.firstName,
                 lastName: user.lastName,
-                email: user.email
+                email: user.email,
+                role: user.role
             }
         });
     } else {
@@ -106,18 +107,18 @@ const register  = async (req, res) => {
         password: req.body.password
     });
     await u.save()
-        .then(() => {
-            res.json({
-                success: true,
-                message: "User Created"
-            });
-        })
-        .catch(() => {
-            res.json({
-                success: false,
-                message: "User Not Created"
-            });
+    .then(() => {
+        res.json({
+            success: true,
+            message: "User Created"
         });
+    })
+    .catch(() => {
+        res.json({
+            success: false,
+            message: "User Not Created"
+        });
+    });
 
 }
 

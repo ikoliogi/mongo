@@ -18,7 +18,7 @@ const create = (req, res) => {
         lastName: req.body.lastName,
         email: req.body.email,
         password: req.body.password,
-        // role: req.body.role
+        role: req.body.role
     });
     u.save()
     .then(() => {
