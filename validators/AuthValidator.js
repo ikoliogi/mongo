@@ -11,8 +11,8 @@ const register = [
 ];
 
 const login  = [
-    check("email").isEmail(),
-    check('password').isLength({ min: 3 }),
+    check("email").isEmail().withMessage("Invalid value at email field"),
+    check('password').isLength({ min: 3 }).withMessage("Password must be more than 3 characters"),
     checkErrors
 ];
 

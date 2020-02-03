@@ -5,7 +5,10 @@ const list = async (req, res) => {
         .find({})
         .populate("category")
         .exec();
-    res.json(products);
+    res.json({
+        success: true,
+        products // products: products
+    });
 };
 
 const cartList = async (req, res) => {
@@ -19,7 +22,10 @@ const listByCategory = async (req, res) => {
     const products = await Product
         .find({category: req.params.categoryId})
         .exec();
-    res.json(products);
+    res.json({
+        success: true,
+        products
+    });
 };
 
 const getOne = async (req, res) => {
@@ -30,9 +36,13 @@ const getOne = async (req, res) => {
             .populate("category")
             .exec();
 
-        res.json(product);
+        res.json({
+            success: true,
+            product: product
+        });
     } else {
         res.json({
+            success: false,
             message: "Product not Found"
         })
     }
@@ -51,6 +61,7 @@ const create = async (req, res) => {
     });
     await u.save();
     res.json({
+        sucess: true,
         message: "Product created"
     });
 };
@@ -60,7 +71,10 @@ const deleteProduct = async (req, res) => {
     .deleteOne({_id: req.params.productId})
     .exec();
     
-    res.json({message: "Product Deleted"});
+    res.json({
+        success: true,
+        message: "Product Deleted"
+    });
 };
 
 const update = async (req, res) => {
@@ -76,6 +90,7 @@ const update = async (req, res) => {
     }).exec();
 
     res.json({
+        success: true,
         message: "Product Updated"
     });
 };

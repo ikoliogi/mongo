@@ -13,10 +13,11 @@ const AdminAuth = async (req, res, next) => {
 
     let decodedUser;
     try {
-        decodedUser = jwt.decode(token, process.env.JWT_SECRET);
+        decodedUser = jwt.verify(token, process.env.JWT_SECRET);
     } catch (err) {
        return res.json({
            success: false,
+           error: err.name, // defines what error occurred - expired, invalid etc
            message: "JWT error"
        });
     }
