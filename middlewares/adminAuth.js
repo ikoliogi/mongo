@@ -33,8 +33,12 @@ const AdminAuth = async (req, res, next) => {
         })
     }
 
+    /*mporoume sto req na apo8hkeusoume oti plhroforia 8eloume,
+    etsi wste ta epomena functions meta to middleware na ta xrhsimopoihsoun
+    paradeigma: AuthController.checkToken*/
+    req.user = user;
     next();
 
-}
+};
 
 module.exports = AdminAuth;

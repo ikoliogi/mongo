@@ -47,9 +47,7 @@ const adminLogin = async (req, res) => {
         });
     }
 
-// res.json(user);
-
-}
+};
 
 const login = async (req, res) => {
 
@@ -94,9 +92,7 @@ const login = async (req, res) => {
         });
     }
 
-// res.json(user);
-
-}
+};
 
 const register  = async (req, res) => {
 
@@ -120,10 +116,21 @@ const register  = async (req, res) => {
         });
     });
 
-}
+};
+
+const checkToken = (req, res) => {
+    res.json({
+        success: true,
+        _id: req.user._id,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName,
+        email: req.user.email
+    })
+};
 
 module.exports = {
     adminLogin,
     login,
-    register
+    register,
+    checkToken
 }
